@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 import java.time.LocalDateTime;
 
+// REST-контроллер с эндпоинтами /api/hello и /api/info
 @RestController
 @RequestMapping("/api")
 public class HelloController {
