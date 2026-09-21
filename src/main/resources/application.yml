@@ -13,7 +13,21 @@ app:
     retry-count: 3
     timeout: 5s
     enabled: true
+  rate-limit:
+    requests-per-minute: 60
+    burst: 10
 
 logging:
   level:
     kz.iitu: INFO
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, env, configprops, conditions
+  endpoint:
+    env:
+      show-values: always
+    configprops:
+      show-values: always

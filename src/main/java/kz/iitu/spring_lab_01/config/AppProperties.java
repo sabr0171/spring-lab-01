@@ -13,13 +13,20 @@ import java.time.Duration;
 public record AppProperties(
         @NotBlank String owner,
         @NotBlank String group,
-        @Valid Mail mail
+        @Valid Mail mail,
+        @Valid RateLimit rateLimit
 ) {
     public record Mail(
             @NotBlank @Email String from,
             @Min(1) @Max(10) @DefaultValue("3") int retryCount,
             @DefaultValue("5s") Duration timeout,
             @DefaultValue("true") boolean enabled
+    ) {
+    }
+
+    public record RateLimit(
+            @Positive int requestsPerMinute,
+            @Min(1) @Max(100) @DefaultValue("10") int burst
     ) {
     }
 }
