@@ -6,9 +6,9 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 @Component("email")
-@Primary
+@Primary // chosen by default
 @Order(2)
-public class EmailNotifier implements Notifier {
+class EmailNotifier implements Notifier {
     private static final Logger log = LoggerFactory.getLogger(EmailNotifier.class);
 
     @Override
