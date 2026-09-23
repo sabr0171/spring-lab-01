@@ -6,7 +6,7 @@ server:
   port: 8080
 
 app:
-  owner: Sabyr Daryn
+  owner: Baipanuly Askarkhan
   group: IT1-2411IS
   mail:
     from: no-reply@iitu.kz
