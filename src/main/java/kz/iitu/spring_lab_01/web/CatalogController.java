@@ -45,4 +45,9 @@ public class CatalogController {
     public String removeTwice(@PathVariable long id) {
         return catalogService.removeTwice(id);
     }
+
+    @DeleteMapping("/clear")
+    public String clearCatalog() {
+        return catalogService.clearCatalog();
+    }
 }

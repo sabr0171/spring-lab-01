@@ -1,6 +1,7 @@
 package kz.iitu.spring_lab_01.service;
 
 import kz.iitu.spring_lab_01.audit.Audited;
+import kz.iitu.spring_lab_01.security.RequiresRole;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
@@ -37,9 +38,14 @@ public class CatalogService {
     }
 
     public String removeTwice(long id) {
-        String first = self.remove(id);       // теперь через прокси — аспекты сработают
+        String first = self.remove(id);       // через прокси — аспекты сработают
         String second = self.remove(id + 1);  // тоже через прокси
         return first + "; " + second;
+    }
+
+    @RequiresRole("ADMIN")
+    public String clearCatalog() {
+        return "Catalog cleared";
     }
 
     private void sleep(long ms) {
