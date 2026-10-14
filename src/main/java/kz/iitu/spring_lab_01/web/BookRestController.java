@@ -24,10 +24,11 @@ public class BookRestController {
         return service.findAll(author).stream().limit(limit).toList();
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Book> find(@PathVariable long id) {
+    @GetMapping(value = "/{id}/citation", produces = "text/plain")
+    public ResponseEntity<String> citation(@PathVariable long id) {
         return service.findById(id)
-                .map(ResponseEntity::ok)
+                .map(b -> ResponseEntity.ok(
+                        b.author() + ". " + b.title() + ". " + b.year() + "."))
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
