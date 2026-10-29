@@ -1,0 +1,72 @@
+2026-10-29T17:53:13.265+05:00  INFO 12880 --- [tx-lab] [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.example.txlab.TransferTransactionTest]: TransferTransactionTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-10-29T17:53:13.266+05:00  INFO 12880 --- [tx-lab] [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.example.txlab.TxLabApplication for test class com.example.txlab.TransferTransactionTest
+2026-10-29T17:53:13.272+05:00  INFO 12880 --- [tx-lab] [           main] c.example.txlab.TransferTransactionTest  : >>> Before transfer of 100.00: Alice=1000.00 (version 0), Bob=500.00 (version 0)
+2026-10-29T17:53:13.272+05:00 DEBUG 12880 --- [tx-lab] [           main] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [com.example.txlab.service.TransferService.transfer]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-10-29T17:53:13.272+05:00 DEBUG 12880 --- [tx-lab] [           main] o.s.orm.jpa.JpaTransactionManager        : Opened new EntityManager [SessionImpl(944468364<open>)] for JPA transaction
+2026-10-29T17:53:13.272+05:00 DEBUG 12880 --- [tx-lab] [           main] o.s.orm.jpa.JpaTransactionManager        : Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@68b4e7b5]
+2026-10-29T17:53:13.273+05:00 DEBUG 12880 --- [tx-lab] [           main] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(944468364<open>)] for JPA transaction
+2026-10-29T17:53:13.273+05:00 DEBUG 12880 --- [tx-lab] [           main] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+Hibernate: select a1_0.id,a1_0.balance,a1_0.owner_name,a1_0.status,a1_0.version from accounts a1_0 where a1_0.id=?
+2026-10-29T17:53:13.274+05:00 DEBUG 12880 --- [tx-lab] [           main] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(944468364<open>)] for JPA transaction
+2026-10-29T17:53:13.274+05:00 DEBUG 12880 --- [tx-lab] [           main] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+Hibernate: select a1_0.id,a1_0.balance,a1_0.owner_name,a1_0.status,a1_0.version from accounts a1_0 where a1_0.id=?
+2026-10-29T17:53:13.275+05:00 DEBUG 12880 --- [tx-lab] [           main] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(944468364<open>)] for JPA transaction
+2026-10-29T17:53:13.275+05:00 DEBUG 12880 --- [tx-lab] [           main] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+Hibernate: update accounts set balance=?,owner_name=?,status=?,version=? where id=? and version=?
+2026-10-29T17:53:13.277+05:00 DEBUG 12880 --- [tx-lab] [           main] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(944468364<open>)] for JPA transaction
+2026-10-29T17:53:13.277+05:00 DEBUG 12880 --- [tx-lab] [           main] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-10-29T17:53:13.277+05:00 DEBUG 12880 --- [tx-lab] [           main] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction commit
+2026-10-29T17:53:13.277+05:00 DEBUG 12880 --- [tx-lab] [           main] o.s.orm.jpa.JpaTransactionManager        : Committing JPA transaction on EntityManager [SessionImpl(944468364<open>)]
+Hibernate: update accounts set balance=?,owner_name=?,status=?,version=? where id=? and version=?
+2026-10-29T17:53:13.278+05:00 DEBUG 12880 --- [tx-lab] [           main] o.s.orm.jpa.JpaTransactionManager        : Closing JPA EntityManager [SessionImpl(944468364<open>)] after transaction
+2026-10-29T17:53:13.278+05:00  INFO 12880 --- [tx-lab] [           main] c.example.txlab.TransferTransactionTest  : >>> After transfer of 100.00: Alice=900.00 (version 1), Bob=600.00 (version 1)
+2026-10-29T17:53:13.284+05:00 DEBUG 12880 --- [tx-lab] [           main] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [com.example.txlab.service.CheckedExceptionDemoService.debitThenThrowChecked]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-10-29T17:53:13.284+05:00 DEBUG 12880 --- [tx-lab] [           main] o.s.orm.jpa.JpaTransactionManager        : Opened new EntityManager [SessionImpl(308147762<open>)] for JPA transaction
+2026-10-29T17:53:13.285+05:00 DEBUG 12880 --- [tx-lab] [           main] o.s.orm.jpa.JpaTransactionManager        : Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@1b472cad]
+2026-10-29T17:53:13.285+05:00 DEBUG 12880 --- [tx-lab] [           main] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(308147762<open>)] for JPA transaction
+2026-10-29T17:53:13.285+05:00 DEBUG 12880 --- [tx-lab] [           main] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+Hibernate: select a1_0.id,a1_0.balance,a1_0.owner_name,a1_0.status,a1_0.version from accounts a1_0 where a1_0.id=?
+2026-10-29T17:53:13.286+05:00 DEBUG 12880 --- [tx-lab] [           main] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction commit
+2026-10-29T17:53:13.286+05:00 DEBUG 12880 --- [tx-lab] [           main] o.s.orm.jpa.JpaTransactionManager        : Committing JPA transaction on EntityManager [SessionImpl(308147762<open>)]
+Hibernate: update accounts set balance=?,owner_name=?,status=?,version=? where id=? and version=?
+2026-10-29T17:53:13.288+05:00 DEBUG 12880 --- [tx-lab] [           main] o.s.orm.jpa.JpaTransactionManager        : Closing JPA EntityManager [SessionImpl(308147762<open>)] after transaction
+2026-10-29T17:53:13.288+05:00  INFO 12880 --- [tx-lab] [           main] c.example.txlab.TransferTransactionTest  : >>> After checked exception, default rollback rules: Alice=900.00 (version 1), Bob=500.00 (version 0)
+2026-10-29T17:53:13.293+05:00 DEBUG 12880 --- [tx-lab] [           main] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [com.example.txlab.service.CheckedExceptionDemoService.debitThenThrowCheckedWithRollbackFor]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,-com.example.txlab.service.TransferNotificationException
+2026-10-29T17:53:13.293+05:00 DEBUG 12880 --- [tx-lab] [           main] o.s.orm.jpa.JpaTransactionManager        : Opened new EntityManager [SessionImpl(543835743<open>)] for JPA transaction
+2026-10-29T17:53:13.294+05:00 DEBUG 12880 --- [tx-lab] [           main] o.s.orm.jpa.JpaTransactionManager        : Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@c509742]
+2026-10-29T17:53:13.294+05:00 DEBUG 12880 --- [tx-lab] [           main] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(543835743<open>)] for JPA transaction
+2026-10-29T17:53:13.294+05:00 DEBUG 12880 --- [tx-lab] [           main] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+Hibernate: select a1_0.id,a1_0.balance,a1_0.owner_name,a1_0.status,a1_0.version from accounts a1_0 where a1_0.id=?
+2026-10-29T17:53:13.294+05:00 DEBUG 12880 --- [tx-lab] [           main] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction rollback
+2026-10-29T17:53:13.295+05:00 DEBUG 12880 --- [tx-lab] [           main] o.s.orm.jpa.JpaTransactionManager        : Rolling back JPA transaction on EntityManager [SessionImpl(543835743<open>)]
+2026-10-29T17:53:13.295+05:00 DEBUG 12880 --- [tx-lab] [           main] o.s.orm.jpa.JpaTransactionManager        : Closing JPA EntityManager [SessionImpl(543835743<open>)] after transaction
+2026-10-29T17:53:13.295+05:00  INFO 12880 --- [tx-lab] [           main] c.example.txlab.TransferTransactionTest  : >>> After checked exception with rollbackFor: Alice=1000.00 (version 0), Bob=500.00 (version 0)
+2026-10-29T17:53:13.300+05:00 DEBUG 12880 --- [tx-lab] [           main] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [com.example.txlab.service.TransferService.transfer]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-10-29T17:53:13.300+05:00 DEBUG 12880 --- [tx-lab] [           main] o.s.orm.jpa.JpaTransactionManager        : Opened new EntityManager [SessionImpl(905962412<open>)] for JPA transaction
+2026-10-29T17:53:13.300+05:00 DEBUG 12880 --- [tx-lab] [           main] o.s.orm.jpa.JpaTransactionManager        : Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@60fc4450]
+2026-10-29T17:53:13.300+05:00 DEBUG 12880 --- [tx-lab] [           main] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(905962412<open>)] for JPA transaction
+2026-10-29T17:53:13.300+05:00 DEBUG 12880 --- [tx-lab] [           main] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+Hibernate: select a1_0.id,a1_0.balance,a1_0.owner_name,a1_0.status,a1_0.version from accounts a1_0 where a1_0.id=?
+2026-10-29T17:53:13.301+05:00 DEBUG 12880 --- [tx-lab] [           main] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(905962412<open>)] for JPA transaction
+2026-10-29T17:53:13.301+05:00 DEBUG 12880 --- [tx-lab] [           main] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+Hibernate: select a1_0.id,a1_0.balance,a1_0.owner_name,a1_0.status,a1_0.version from accounts a1_0 where a1_0.id=?
+2026-10-29T17:53:13.302+05:00 DEBUG 12880 --- [tx-lab] [           main] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(905962412<open>)] for JPA transaction
+2026-10-29T17:53:13.302+05:00 DEBUG 12880 --- [tx-lab] [           main] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+Hibernate: update accounts set balance=?,owner_name=?,status=?,version=? where id=? and version=?
+2026-10-29T17:53:13.303+05:00 DEBUG 12880 --- [tx-lab] [           main] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction rollback
+2026-10-29T17:53:13.303+05:00 DEBUG 12880 --- [tx-lab] [           main] o.s.orm.jpa.JpaTransactionManager        : Rolling back JPA transaction on EntityManager [SessionImpl(905962412<open>)]
+2026-10-29T17:53:13.303+05:00 DEBUG 12880 --- [tx-lab] [           main] o.s.orm.jpa.JpaTransactionManager        : Closing JPA EntityManager [SessionImpl(905962412<open>)] after transaction
+2026-10-29T17:53:13.304+05:00  INFO 12880 --- [tx-lab] [           main] c.example.txlab.TransferTransactionTest  : >>> After unchecked exception between debit and credit: Alice=1000.00 (version 0), Bob=500.00 (version 0)
+2026-10-29T17:53:13.308+05:00 DEBUG 12880 --- [tx-lab] [           main] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [com.example.txlab.service.TransferService.transfer]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-10-29T17:53:13.308+05:00 DEBUG 12880 --- [tx-lab] [           main] o.s.orm.jpa.JpaTransactionManager        : Opened new EntityManager [SessionImpl(109611571<open>)] for JPA transaction
+2026-10-29T17:53:13.308+05:00 DEBUG 12880 --- [tx-lab] [           main] o.s.orm.jpa.JpaTransactionManager        : Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@4303511e]
+2026-10-29T17:53:13.308+05:00 DEBUG 12880 --- [tx-lab] [           main] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(109611571<open>)] for JPA transaction
+2026-10-29T17:53:13.308+05:00 DEBUG 12880 --- [tx-lab] [           main] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+Hibernate: select a1_0.id,a1_0.balance,a1_0.owner_name,a1_0.status,a1_0.version from accounts a1_0 where a1_0.id=?
+2026-10-29T17:53:13.310+05:00 DEBUG 12880 --- [tx-lab] [           main] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(109611571<open>)] for JPA transaction
+2026-10-29T17:53:13.310+05:00 DEBUG 12880 --- [tx-lab] [           main] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+Hibernate: select a1_0.id,a1_0.balance,a1_0.owner_name,a1_0.status,a1_0.version from accounts a1_0 where a1_0.id=?
+2026-10-29T17:53:13.310+05:00 DEBUG 12880 --- [tx-lab] [           main] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction rollback
+2026-10-29T17:53:13.310+05:00 DEBUG 12880 --- [tx-lab] [           main] o.s.orm.jpa.JpaTransactionManager        : Rolling back JPA transaction on EntityManager [SessionImpl(109611571<open>)]
+2026-10-29T17:53:13.310+05:00 DEBUG 12880 --- [tx-lab] [           main] o.s.orm.jpa.JpaTransactionManager        : Closing JPA EntityManager [SessionImpl(109611571<open>)] after transaction
+2026-10-29T17:53:13.312+05:00  INFO 12880 --- [tx-lab] [           main] c.example.txlab.TransferTransactionTest  : >>> After failed transfer of 5000.00: Alice=1000.00 (version 0), Bob=500.00 (version 0)

@@ -1,0 +1,107 @@
+﻿
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.5.7)
+
+2026-10-29T18:02:56.135+05:00  INFO 30384 --- [tx-lab] [           main] com.example.txlab.TxLabApplication       : Starting TxLabApplication using Java 25.0.4.1 with PID 30384 (C:\Users\Айнур\IdeaProjects\Spring-lab-01\target\classes started by Айнур in C:\Users\Айнур\IdeaProjects\Spring-lab-01)
+2026-10-29T18:02:56.141+05:00  INFO 30384 --- [tx-lab] [           main] com.example.txlab.TxLabApplication       : The following 1 profile is active: "persistent"
+2026-10-29T18:02:56.552+05:00  INFO 30384 --- [tx-lab] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-10-29T18:02:56.593+05:00  INFO 30384 --- [tx-lab] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 34 ms. Found 2 JPA repository interfaces.
+2026-10-29T18:02:56.918+05:00  INFO 30384 --- [tx-lab] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2026-10-29T18:02:56.930+05:00  INFO 30384 --- [tx-lab] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-10-29T18:02:56.930+05:00  INFO 30384 --- [tx-lab] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.48]
+2026-10-29T18:02:56.988+05:00  INFO 30384 --- [tx-lab] [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-10-29T18:02:56.988+05:00  INFO 30384 --- [tx-lab] [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 817 ms
+2026-10-29T18:02:57.183+05:00  INFO 30384 --- [tx-lab] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-10-29T18:02:57.363+05:00  INFO 30384 --- [tx-lab] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:file:./data/txlab user=SA
+2026-10-29T18:02:57.364+05:00  INFO 30384 --- [tx-lab] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-10-29T18:02:57.399+05:00  INFO 30384 --- [tx-lab] [           main] org.flywaydb.core.FlywayExecutor         : Database: jdbc:h2:file:./data/txlab (H2 2.3)
+2026-10-29T18:02:57.437+05:00  INFO 30384 --- [tx-lab] [           main] o.f.core.internal.command.DbValidate     : Successfully validated 4 migrations (execution time 00:00.019s)
+2026-10-29T18:02:57.446+05:00  INFO 30384 --- [tx-lab] [           main] o.f.core.internal.command.DbMigrate      : Current version of schema "PUBLIC": 4
+2026-10-29T18:02:57.448+05:00  INFO 30384 --- [tx-lab] [           main] o.f.core.internal.command.DbMigrate      : Schema "PUBLIC" is up to date. No migration necessary.
+2026-10-29T18:02:57.503+05:00  INFO 30384 --- [tx-lab] [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-10-29T18:02:57.545+05:00  INFO 30384 --- [tx-lab] [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.33.Final
+2026-10-29T18:02:57.571+05:00  INFO 30384 --- [tx-lab] [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-10-29T18:02:57.784+05:00  INFO 30384 --- [tx-lab] [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-10-29T18:02:57.836+05:00  INFO 30384 --- [tx-lab] [           main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 2.3.232
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-10-29T18:02:58.842+05:00  INFO 30384 --- [tx-lab] [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-10-29T18:02:58.875+05:00  INFO 30384 --- [tx-lab] [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-10-29T18:02:59.820+05:00  INFO 30384 --- [tx-lab] [           main] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:file:./data/txlab'
+2026-10-29T18:02:59.986+05:00  INFO 30384 --- [tx-lab] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2026-10-29T18:02:59.998+05:00  INFO 30384 --- [tx-lab] [           main] com.example.txlab.TxLabApplication       : Started TxLabApplication in 4.173 seconds (process running for 4.43)
+2026-10-29T18:03:00.003+05:00  INFO 30384 --- [tx-lab] [           main] c.e.txlab.config.SchemaHistoryLogger     : >>> flyway_schema_history:
+2026-10-29T18:03:00.009+05:00  INFO 30384 --- [tx-lab] [           main] c.e.txlab.config.SchemaHistoryLogger     : >>>   rank=-1 version=null description='<< Flyway Schema History table created >>' installed_on=2026-10-29 17:23:15.346178 success=true
+2026-10-29T18:03:00.009+05:00  INFO 30384 --- [tx-lab] [           main] c.e.txlab.config.SchemaHistoryLogger     : >>>   rank=1 version=1 description='create accounts' installed_on=2026-10-29 17:23:15.376674 success=true
+2026-10-29T18:03:00.010+05:00  INFO 30384 --- [tx-lab] [           main] c.e.txlab.config.SchemaHistoryLogger     : >>>   rank=2 version=2 description='add status' installed_on=2026-10-29 17:23:15.389722 success=true
+2026-10-29T18:03:00.010+05:00  INFO 30384 --- [tx-lab] [           main] c.e.txlab.config.SchemaHistoryLogger     : >>>   rank=3 version=3 description='create audit log' installed_on=2026-10-29 17:23:15.394673 success=true
+2026-10-29T18:03:00.010+05:00  INFO 30384 --- [tx-lab] [           main] c.e.txlab.config.SchemaHistoryLogger     : >>>   rank=4 version=4 description='add owner name index' installed_on=2026-10-29 17:24:04.517998 success=true
+2026-10-29T18:03:24.353+05:00  INFO 30384 --- [tx-lab] [nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-10-29T18:03:24.353+05:00  INFO 30384 --- [tx-lab] [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-10-29T18:03:24.354+05:00  INFO 30384 --- [tx-lab] [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2026-10-29T18:03:24.405+05:00 DEBUG 30384 --- [tx-lab] [nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [com.example.txlab.service.AccountService.findAll]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2026-10-29T18:03:24.460+05:00 DEBUG 30384 --- [tx-lab] [nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Opened new EntityManager [SessionImpl(1665461502<open>)] for JPA transaction
+2026-10-29T18:03:24.467+05:00 DEBUG 30384 --- [tx-lab] [nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@6850c9e8]
+2026-10-29T18:03:24.474+05:00 DEBUG 30384 --- [tx-lab] [nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(1665461502<open>)] for JPA transaction
+2026-10-29T18:03:24.474+05:00 DEBUG 30384 --- [tx-lab] [nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+Hibernate: select a1_0.id,a1_0.balance,a1_0.owner_name,a1_0.status,a1_0.version from accounts a1_0
+2026-10-29T18:03:24.697+05:00 DEBUG 30384 --- [tx-lab] [nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction commit
+2026-10-29T18:03:24.698+05:00 DEBUG 30384 --- [tx-lab] [nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Committing JPA transaction on EntityManager [SessionImpl(1665461502<open>)]
+2026-10-29T18:03:24.699+05:00 DEBUG 30384 --- [tx-lab] [nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Closing JPA EntityManager [SessionImpl(1665461502<open>)] after transaction
+2026-10-29T18:04:53.567+05:00 DEBUG 30384 --- [tx-lab] [nio-8080-exec-3] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [com.example.txlab.service.TransferService.transfer]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-10-29T18:04:53.568+05:00 DEBUG 30384 --- [tx-lab] [nio-8080-exec-3] o.s.orm.jpa.JpaTransactionManager        : Opened new EntityManager [SessionImpl(1781661136<open>)] for JPA transaction
+2026-10-29T18:04:53.568+05:00 DEBUG 30384 --- [tx-lab] [nio-8080-exec-3] o.s.orm.jpa.JpaTransactionManager        : Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@11d73371]
+2026-10-29T18:04:53.571+05:00 DEBUG 30384 --- [tx-lab] [nio-8080-exec-3] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(1781661136<open>)] for JPA transaction
+2026-10-29T18:04:53.571+05:00 DEBUG 30384 --- [tx-lab] [nio-8080-exec-3] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+Hibernate: select a1_0.id,a1_0.balance,a1_0.owner_name,a1_0.status,a1_0.version from accounts a1_0 where a1_0.id=?
+2026-10-29T18:04:53.589+05:00 DEBUG 30384 --- [tx-lab] [nio-8080-exec-3] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(1781661136<open>)] for JPA transaction
+2026-10-29T18:04:53.589+05:00 DEBUG 30384 --- [tx-lab] [nio-8080-exec-3] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+Hibernate: select a1_0.id,a1_0.balance,a1_0.owner_name,a1_0.status,a1_0.version from accounts a1_0 where a1_0.id=?
+2026-10-29T18:04:53.591+05:00 DEBUG 30384 --- [tx-lab] [nio-8080-exec-3] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(1781661136<open>)] for JPA transaction
+2026-10-29T18:04:53.591+05:00 DEBUG 30384 --- [tx-lab] [nio-8080-exec-3] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+Hibernate: update accounts set balance=?,owner_name=?,status=?,version=? where id=? and version=?
+2026-10-29T18:04:53.636+05:00 DEBUG 30384 --- [tx-lab] [nio-8080-exec-3] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(1781661136<open>)] for JPA transaction
+2026-10-29T18:04:53.637+05:00 DEBUG 30384 --- [tx-lab] [nio-8080-exec-3] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-10-29T18:04:53.638+05:00 DEBUG 30384 --- [tx-lab] [nio-8080-exec-3] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction commit
+2026-10-29T18:04:53.638+05:00 DEBUG 30384 --- [tx-lab] [nio-8080-exec-3] o.s.orm.jpa.JpaTransactionManager        : Committing JPA transaction on EntityManager [SessionImpl(1781661136<open>)]
+Hibernate: update accounts set balance=?,owner_name=?,status=?,version=? where id=? and version=?
+2026-10-29T18:04:53.640+05:00 DEBUG 30384 --- [tx-lab] [nio-8080-exec-3] o.s.orm.jpa.JpaTransactionManager        : Closing JPA EntityManager [SessionImpl(1781661136<open>)] after transaction
+2026-10-29T18:04:53.697+05:00 DEBUG 30384 --- [tx-lab] [nio-8080-exec-5] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [com.example.txlab.service.TransferService.transfer]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-10-29T18:04:53.697+05:00 DEBUG 30384 --- [tx-lab] [nio-8080-exec-5] o.s.orm.jpa.JpaTransactionManager        : Opened new EntityManager [SessionImpl(1739697185<open>)] for JPA transaction
+2026-10-29T18:04:53.697+05:00 DEBUG 30384 --- [tx-lab] [nio-8080-exec-5] o.s.orm.jpa.JpaTransactionManager        : Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@69764ea7]
+2026-10-29T18:04:53.697+05:00 DEBUG 30384 --- [tx-lab] [nio-8080-exec-5] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(1739697185<open>)] for JPA transaction
+2026-10-29T18:04:53.698+05:00 DEBUG 30384 --- [tx-lab] [nio-8080-exec-5] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+Hibernate: select a1_0.id,a1_0.balance,a1_0.owner_name,a1_0.status,a1_0.version from accounts a1_0 where a1_0.id=?
+2026-10-29T18:04:53.699+05:00 DEBUG 30384 --- [tx-lab] [nio-8080-exec-5] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(1739697185<open>)] for JPA transaction
+2026-10-29T18:04:53.699+05:00 DEBUG 30384 --- [tx-lab] [nio-8080-exec-5] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+Hibernate: select a1_0.id,a1_0.balance,a1_0.owner_name,a1_0.status,a1_0.version from accounts a1_0 where a1_0.id=?
+2026-10-29T18:04:53.700+05:00 DEBUG 30384 --- [tx-lab] [nio-8080-exec-5] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction rollback
+2026-10-29T18:04:53.701+05:00 DEBUG 30384 --- [tx-lab] [nio-8080-exec-5] o.s.orm.jpa.JpaTransactionManager        : Rolling back JPA transaction on EntityManager [SessionImpl(1739697185<open>)]
+2026-10-29T18:04:53.703+05:00 DEBUG 30384 --- [tx-lab] [nio-8080-exec-5] o.s.orm.jpa.JpaTransactionManager        : Closing JPA EntityManager [SessionImpl(1739697185<open>)] after transaction
+2026-10-29T18:04:53.764+05:00 DEBUG 30384 --- [tx-lab] [nio-8080-exec-7] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [com.example.txlab.service.AccountService.findAll]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2026-10-29T18:04:53.765+05:00 DEBUG 30384 --- [tx-lab] [nio-8080-exec-7] o.s.orm.jpa.JpaTransactionManager        : Opened new EntityManager [SessionImpl(299387802<open>)] for JPA transaction
+2026-10-29T18:04:53.765+05:00 DEBUG 30384 --- [tx-lab] [nio-8080-exec-7] o.s.orm.jpa.JpaTransactionManager        : Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@1f1fb7d1]
+2026-10-29T18:04:53.765+05:00 DEBUG 30384 --- [tx-lab] [nio-8080-exec-7] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(299387802<open>)] for JPA transaction
+2026-10-29T18:04:53.765+05:00 DEBUG 30384 --- [tx-lab] [nio-8080-exec-7] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+Hibernate: select a1_0.id,a1_0.balance,a1_0.owner_name,a1_0.status,a1_0.version from accounts a1_0
+2026-10-29T18:04:53.768+05:00 DEBUG 30384 --- [tx-lab] [nio-8080-exec-7] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction commit
+2026-10-29T18:04:53.768+05:00 DEBUG 30384 --- [tx-lab] [nio-8080-exec-7] o.s.orm.jpa.JpaTransactionManager        : Committing JPA transaction on EntityManager [SessionImpl(299387802<open>)]
+2026-10-29T18:04:53.769+05:00 DEBUG 30384 --- [tx-lab] [nio-8080-exec-7] o.s.orm.jpa.JpaTransactionManager        : Closing JPA EntityManager [SessionImpl(299387802<open>)] after transaction
+[ERROR] Failed to execute goal org.springframework.boot:spring-boot-maven-plugin:3.5.7:run (default-cli) on project tx-lab: Process terminated with exit code: -1 -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoExecutionException

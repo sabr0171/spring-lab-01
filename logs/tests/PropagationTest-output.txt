@@ -1,0 +1,46 @@
+2026-10-29T17:53:12.741+05:00  INFO 12880 --- [tx-lab] [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.example.txlab.PropagationTest]: PropagationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-10-29T17:53:12.742+05:00  INFO 12880 --- [tx-lab] [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.example.txlab.TxLabApplication for test class com.example.txlab.PropagationTest
+2026-10-29T17:53:12.755+05:00 DEBUG 12880 --- [tx-lab] [           main] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [com.example.txlab.service.PropagationDemoService.debitWithRequiredAuditThenFail]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-10-29T17:53:12.755+05:00 DEBUG 12880 --- [tx-lab] [           main] o.s.orm.jpa.JpaTransactionManager        : Opened new EntityManager [SessionImpl(899220406<open>)] for JPA transaction
+2026-10-29T17:53:12.756+05:00 DEBUG 12880 --- [tx-lab] [           main] o.s.orm.jpa.JpaTransactionManager        : Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@1071f3ad]
+2026-10-29T17:53:12.756+05:00 DEBUG 12880 --- [tx-lab] [           main] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(899220406<open>)] for JPA transaction
+2026-10-29T17:53:12.756+05:00 DEBUG 12880 --- [tx-lab] [           main] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+Hibernate: select a1_0.id,a1_0.balance,a1_0.owner_name,a1_0.status,a1_0.version from accounts a1_0 where a1_0.id=?
+2026-10-29T17:53:12.758+05:00 DEBUG 12880 --- [tx-lab] [           main] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(899220406<open>)] for JPA transaction
+2026-10-29T17:53:12.758+05:00 DEBUG 12880 --- [tx-lab] [           main] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+Hibernate: update accounts set balance=?,owner_name=?,status=?,version=? where id=? and version=?
+2026-10-29T17:53:12.762+05:00 DEBUG 12880 --- [tx-lab] [           main] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(899220406<open>)] for JPA transaction
+2026-10-29T17:53:12.762+05:00 DEBUG 12880 --- [tx-lab] [           main] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-10-29T17:53:12.763+05:00 DEBUG 12880 --- [tx-lab] [           main] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(899220406<open>)] for JPA transaction
+2026-10-29T17:53:12.763+05:00 DEBUG 12880 --- [tx-lab] [           main] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+Hibernate: insert into audit_log (created_at,message,id) values (?,?,default)
+2026-10-29T17:53:12.766+05:00 DEBUG 12880 --- [tx-lab] [           main] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction rollback
+2026-10-29T17:53:12.766+05:00 DEBUG 12880 --- [tx-lab] [           main] o.s.orm.jpa.JpaTransactionManager        : Rolling back JPA transaction on EntityManager [SessionImpl(899220406<open>)]
+2026-10-29T17:53:12.767+05:00 DEBUG 12880 --- [tx-lab] [           main] o.s.orm.jpa.JpaTransactionManager        : Closing JPA EntityManager [SessionImpl(899220406<open>)] after transaction
+2026-10-29T17:53:12.767+05:00  INFO 12880 --- [tx-lab] [           main] com.example.txlab.PropagationTest        : >>> REQUIRED: audit records after outer rollback = 0
+2026-10-29T17:53:12.769+05:00  INFO 12880 --- [tx-lab] [           main] com.example.txlab.PropagationTest        : >>> REQUIRED, after outer rollback: Alice=1000.00 (version 0), Bob=500.00 (version 0)
+2026-10-29T17:53:12.779+05:00 DEBUG 12880 --- [tx-lab] [           main] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [com.example.txlab.service.PropagationDemoService.debitWithRequiresNewAuditThenFail]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-10-29T17:53:12.779+05:00 DEBUG 12880 --- [tx-lab] [           main] o.s.orm.jpa.JpaTransactionManager        : Opened new EntityManager [SessionImpl(1257287212<open>)] for JPA transaction
+2026-10-29T17:53:12.779+05:00 DEBUG 12880 --- [tx-lab] [           main] o.s.orm.jpa.JpaTransactionManager        : Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@13446044]
+2026-10-29T17:53:12.779+05:00 DEBUG 12880 --- [tx-lab] [           main] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(1257287212<open>)] for JPA transaction
+2026-10-29T17:53:12.779+05:00 DEBUG 12880 --- [tx-lab] [           main] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+Hibernate: select a1_0.id,a1_0.balance,a1_0.owner_name,a1_0.status,a1_0.version from accounts a1_0 where a1_0.id=?
+2026-10-29T17:53:12.781+05:00 DEBUG 12880 --- [tx-lab] [           main] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(1257287212<open>)] for JPA transaction
+2026-10-29T17:53:12.781+05:00 DEBUG 12880 --- [tx-lab] [           main] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+Hibernate: update accounts set balance=?,owner_name=?,status=?,version=? where id=? and version=?
+2026-10-29T17:53:12.782+05:00 DEBUG 12880 --- [tx-lab] [           main] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(1257287212<open>)] for JPA transaction
+2026-10-29T17:53:12.782+05:00 DEBUG 12880 --- [tx-lab] [           main] o.s.orm.jpa.JpaTransactionManager        : Suspending current transaction, creating new transaction with name [com.example.txlab.service.AuditService.recordInNewTransaction]
+2026-10-29T17:53:12.782+05:00 DEBUG 12880 --- [tx-lab] [           main] o.s.orm.jpa.JpaTransactionManager        : Opened new EntityManager [SessionImpl(2052728503<open>)] for JPA transaction
+2026-10-29T17:53:12.782+05:00 DEBUG 12880 --- [tx-lab] [           main] o.s.orm.jpa.JpaTransactionManager        : Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@3524ee20]
+2026-10-29T17:53:12.784+05:00 DEBUG 12880 --- [tx-lab] [           main] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(2052728503<open>)] for JPA transaction
+2026-10-29T17:53:12.784+05:00 DEBUG 12880 --- [tx-lab] [           main] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+Hibernate: insert into audit_log (created_at,message,id) values (?,?,default)
+2026-10-29T17:53:12.784+05:00 DEBUG 12880 --- [tx-lab] [           main] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction commit
+2026-10-29T17:53:12.784+05:00 DEBUG 12880 --- [tx-lab] [           main] o.s.orm.jpa.JpaTransactionManager        : Committing JPA transaction on EntityManager [SessionImpl(2052728503<open>)]
+2026-10-29T17:53:12.785+05:00 DEBUG 12880 --- [tx-lab] [           main] o.s.orm.jpa.JpaTransactionManager        : Closing JPA EntityManager [SessionImpl(2052728503<open>)] after transaction
+2026-10-29T17:53:12.785+05:00 DEBUG 12880 --- [tx-lab] [           main] o.s.orm.jpa.JpaTransactionManager        : Resuming suspended transaction after completion of inner transaction
+2026-10-29T17:53:12.785+05:00 DEBUG 12880 --- [tx-lab] [           main] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction rollback
+2026-10-29T17:53:12.785+05:00 DEBUG 12880 --- [tx-lab] [           main] o.s.orm.jpa.JpaTransactionManager        : Rolling back JPA transaction on EntityManager [SessionImpl(1257287212<open>)]
+2026-10-29T17:53:12.785+05:00 DEBUG 12880 --- [tx-lab] [           main] o.s.orm.jpa.JpaTransactionManager        : Closing JPA EntityManager [SessionImpl(1257287212<open>)] after transaction
+2026-10-29T17:53:12.785+05:00  INFO 12880 --- [tx-lab] [           main] com.example.txlab.PropagationTest        : >>> REQUIRES_NEW: audit records after outer rollback = 1
+2026-10-29T17:53:12.786+05:00  INFO 12880 --- [tx-lab] [           main] com.example.txlab.PropagationTest        : >>> REQUIRES_NEW, after outer rollback: Alice=1000.00 (version 0), Bob=500.00 (version 0)

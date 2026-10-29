@@ -1,0 +1,4 @@
+# The default inline mock maker self-attaches a Java agent, which fails when the Maven repository path
+# contains non-ASCII characters (C:\Users\<Cyrillic name>\.m2). The tests use no mocks; Spring Boot only
+# initialises Mockito, so the agent-free subclass mock maker is enough.
+mock-maker-subclass
