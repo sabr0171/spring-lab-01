@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <title>Start</title>
     <link rel="stylesheet" th:href="@{/css/app.css}">
+    <!-- Variant 6: an external script from this origin — allowed by script-src 'self' -->
+    <script th:src="@{/js/csp-check.js}"></script>
 </head>
 <body>
 <header th:replace="~{fragments/header :: header}"></header>
@@ -16,5 +18,21 @@
     <li sec:authorize="hasRole('ADMIN')"><a th:href="@{/admin}">Administration</a> — administrators only</li>
     <li sec:authorize="isAnonymous()"><a th:href="@{/login}">Log in</a></li>
 </ul>
+
+<section class="csp-demo">
+    <h2>Variant 6: Content-Security-Policy</h2>
+    <p>External script <code>/js/csp-check.js</code>: <b id="external-status" class="bad">did not run</b></p>
+    <p>Inline script in this page: <b id="inline-status" class="ok">did not run — blocked by the Content-Security-Policy</b></p>
+    <p>Violations reported by the browser:</p>
+    <ul id="csp-violations"><li>none</li></ul>
+    <p class="hint">Open the browser console (F12 → Console): the browser explains which directive refused the inline script.</p>
+</section>
+
+<!-- Variant 6: the kind of script an attacker would inject. It must NOT run while the CSP header is sent. -->
+<script>
+    var inline = document.getElementById('inline-status');
+    inline.textContent = 'RAN — the page has no Content-Security-Policy';
+    inline.className = 'bad';
+</script>
 </body>
 </html>

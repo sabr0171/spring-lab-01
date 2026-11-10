@@ -100,6 +100,7 @@ class AccessMatrixTest extends PostgresIntegrationTest {
         void loginPageAndStylesheetAreOpen() throws Exception {
             mvc.perform(get("/login")).andExpect(status().isOk());
             mvc.perform(get("/css/app.css")).andExpect(status().isOk());
+            mvc.perform(get("/js/csp-check.js")).andExpect(status().isOk());
         }
     }
 

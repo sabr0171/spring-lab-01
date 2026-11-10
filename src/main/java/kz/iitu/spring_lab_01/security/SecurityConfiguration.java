@@ -14,6 +14,19 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class SecurityConfiguration {
 
+    // Variant 6: the Content-Security-Policy sent with every response. The browser runs only scripts and
+    // stylesheets loaded from this origin: inline <script> blocks, onclick="..." handlers, style="..."
+    // attributes and anything from another host are refused, so an injected script cannot run.
+    static final String CONTENT_SECURITY_POLICY = String.join("; ",
+            "default-src 'self'",
+            "script-src 'self'",
+            "style-src 'self'",
+            "img-src 'self' data:",
+            "object-src 'none'",
+            "base-uri 'self'",
+            "form-action 'self'",
+            "frame-ancestors 'none'");
+
     // Rules are evaluated in order and the first match wins: specific patterns first, denyAll() last,
     // so that an endpoint nobody wrote a rule for is closed rather than open.
     @Bean
@@ -23,7 +36,7 @@ public class SecurityConfiguration {
                 // The container's own ERROR dispatch (rendering a 400/403/404 page) is not a new request:
                 // without this line every error page would itself be refused by denyAll().
                 .dispatcherTypeMatchers(DispatcherType.ERROR).permitAll()
-                .requestMatchers("/", "/login", "/css/**").permitAll()
+                .requestMatchers("/", "/login", "/css/**", "/js/**").permitAll()
                 .requestMatchers(HttpMethod.GET, "/books/**").hasAnyRole("USER", "ADMIN")
                 .requestMatchers("/books/**").hasRole("ADMIN")   // create, edit, delete
                 .requestMatchers("/admin/**").hasRole("ADMIN")
@@ -33,7 +46,9 @@ public class SecurityConfiguration {
                 // login page was open (DevTools, for example) could be "remembered" and replayed after login.
                 .defaultSuccessUrl("/books", true)
                 .permitAll())
-            .logout(logout -> logout.logoutSuccessUrl("/?logout"));
+            .logout(logout -> logout.logoutSuccessUrl("/?logout"))
+            .headers(headers -> headers
+                .contentSecurityPolicy(csp -> csp.policyDirectives(CONTENT_SECURITY_POLICY)));
         // CSRF protection is on by default and is deliberately not touched.
         return http.build();
     }

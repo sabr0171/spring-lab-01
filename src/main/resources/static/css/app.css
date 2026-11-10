@@ -13,3 +13,8 @@ form.inline { display: inline; margin-left: 8px; }
 .flash.error { color: #b42318; }
 .owner { color: #555; margin-top: -0.5rem; }
 
+/* Variant 6: the Content-Security-Policy demonstration on the start page */
+.csp-demo { background: #fff; border: 1px solid #ccc; padding: 4px 16px 10px; margin-top: 1rem; }
+.csp-demo .ok { color: #1a7f37; }
+.csp-demo .bad { color: #b42318; }
+.csp-demo .hint { color: #555; font-size: 0.9em; }
