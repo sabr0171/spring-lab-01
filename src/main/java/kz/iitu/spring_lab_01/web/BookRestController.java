@@ -1,6 +1,8 @@
 package kz.iitu.spring_lab_01.web;
 
+import jakarta.validation.Valid;
 import kz.iitu.spring_lab_01.catalog.Book;
+import kz.iitu.spring_lab_01.catalog.BookRequest;
 import kz.iitu.spring_lab_01.catalog.BookService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -8,6 +10,8 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.util.List;
 
+// Lab 10: no URL rule opens /api/**, so the last rule of the filter chain (denyAll) closes this controller.
+// BookService still checks the role itself (@PreAuthorize), in case /api/** is ever opened.
 @RestController
 @RequestMapping("/api/books")
 public class BookRestController {
@@ -28,21 +32,21 @@ public class BookRestController {
     public ResponseEntity<String> citation(@PathVariable long id) {
         return service.findById(id)
                 .map(b -> ResponseEntity.ok(
-                        b.author() + ". " + b.title() + ". " + b.year() + "."))
+                        b.getAuthor() + ". " + b.getTitle() + ". " + b.getYear() + "."))
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public ResponseEntity<Book> create(@RequestBody Book book) {
-        Book saved = service.create(book);
+    public ResponseEntity<Book> create(@Valid @RequestBody BookRequest request) {
+        Book saved = service.create(request);
         return ResponseEntity
-                .created(URI.create("/api/books/" + saved.id()))
+                .created(URI.create("/api/books/" + saved.getId()))
                 .body(saved);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Book> replace(@PathVariable long id, @RequestBody Book book) {
-        return service.replace(id, book)
+    public ResponseEntity<Book> replace(@PathVariable long id, @Valid @RequestBody BookRequest request) {
+        return service.replace(id, request)
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
@@ -52,5 +56,12 @@ public class BookRestController {
         return service.delete(id)
                 ? ResponseEntity.noContent().build()
                 : ResponseEntity.notFound().build();
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Book> get(@PathVariable long id) {
+        return service.findById(id)
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 }

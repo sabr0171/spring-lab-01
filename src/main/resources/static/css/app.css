@@ -3,3 +3,13 @@ table { border-collapse: collapse; background: #fff; margin-bottom: 1rem; }
 th, td { padding: 8px 14px; border: 1px solid #ccc; }
 th { background: #e3e8ef; }
 .flash { color: #1a7f37; font-weight: bold; }
+
+/* Lab 10: who is logged in, and what they may use */
+.topbar { display: flex; justify-content: space-between; align-items: center; gap: 1rem;
+          background: #fff; border: 1px solid #ccc; padding: 8px 14px; margin-bottom: 1rem; }
+.topbar nav a { margin-right: 14px; }
+.roles { color: #555; font-family: monospace; }
+form.inline { display: inline; margin-left: 8px; }
+.flash.error { color: #b42318; }
+.owner { color: #555; margin-top: -0.5rem; }
+

@@ -1,29 +1,46 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title th:text="${title}">Catalogue</title>
     <link rel="stylesheet" th:href="@{/css/app.css}">
 </head>
 <body>
+<header th:replace="~{fragments/header :: header}"></header>
 <h1 th:text="${title}">Catalogue</h1>
 
 <p th:if="${message}" class="flash" th:text="${message}"></p>
+<p th:if="${error}" class="flash error" th:text="${error}"></p>
 
 <table>
-    <tr><th>#</th><th>Title</th><th>Author</th><th>Year</th></tr>
+    <tr>
+        <th>#</th><th>Title</th><th>Author</th><th>Genre</th><th>Year</th>
+        <th sec:authorize="hasRole('ADMIN')"></th>
+    </tr>
     <tr th:each="book : ${books}">
         <td th:text="${book.id}">1</td>
         <td th:text="${book.title}">Title</td>
-        <td th:text="${book.author}">Author</td>
+        <td th:text="${book.author} ?: '—'">Author</td>
+        <td th:text="${book.genre}">PROGRAMMING</td>
         <td th:text="${book.year}">2020</td>
+        <td sec:authorize="hasRole('ADMIN')">
+            <form th:action="@{/books/{id}/delete(id=${book.id})}" method="post" class="inline">
+                <button>Delete</button>
+            </form>
+        </td>
     </tr>
 </table>
 
-<form method="post" action="/books">
-    <input name="title" placeholder="Title" required>
-    <input name="author" placeholder="Author" required>
-    <input name="year" type="number" placeholder="Year" required>
+<!-- th:action (not a plain action="...") makes Thymeleaf add the hidden _csrf field.
+     Only an administrator sees the form; POST /books is refused to everybody else on the server anyway. -->
+<form sec:authorize="hasRole('ADMIN')" method="post" th:action="@{/books}">
+    <input name="title" placeholder="Title" required maxlength="200">
+    <input name="author" placeholder="Author (optional)" maxlength="120">
+    <select name="genre" required>
+        <option th:each="g : ${genres}" th:value="${g}" th:text="${g}">NOVEL</option>
+    </select>
+    <input name="year" type="number" placeholder="Year" required min="1" max="2100">
     <button>Add</button>
 </form>
 </body>
