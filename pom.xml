@@ -21,6 +21,11 @@
 		<java.version>25</java.version>
 		<embedded-postgres.version>2.2.2</embedded-postgres.version>
 		<embedded-postgres-binaries.version>17.11.0</embedded-postgres-binaries.version>
+		<!-- Lab 12: OneDrive marks the folders it syncs read-only, and "mvnw clean" then fails with an
+		     AccessDeniedException on target\classes\...; force lets the clean plugin delete them anyway -->
+		<maven.clean.force>true</maven.clean.force>
+		<!-- options for the test JVM that only one operating system needs; filled in by the "windows" profile -->
+		<test.jvm.os-options></test.jvm.os-options>
 	</properties>
 
 	<dependencyManagement>
@@ -96,6 +101,33 @@
 			<artifactId>spring-boot-starter-security-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<!-- Lab 12. Versions come from the Spring Boot BOM. Boot 4.1 ships Testcontainers 2.x, whose modules are
+		     called testcontainers-postgresql and testcontainers-junit-jupiter (the 1.x names are gone). -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-testcontainers</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.testcontainers</groupId>
+			<artifactId>testcontainers-postgresql</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.testcontainers</groupId>
+			<artifactId>testcontainers-junit-jupiter</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>   <!-- @DataJpaTest, TestEntityManager -->
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>   <!-- RestTestClient, @AutoConfigureRestTestClient -->
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-resttestclient</artifactId>
+			<scope>test</scope>
+		</dependency>
 		<dependency>   <!-- a real PostgreSQL started from the tests, no Docker needed -->
 			<groupId>io.zonky.test</groupId>
 			<artifactId>embedded-postgres</artifactId>
@@ -110,6 +142,88 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+
+			<!-- Lab 12: JaCoCo. prepare-agent gives the test JVM the coverage agent; report writes
+			     target/site/jacoco in the verify phase. -->
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>0.8.16</version>
+				<executions>
+					<execution>
+						<goals><goal>prepare-agent</goal></goals>
+						<configuration>
+							<propertyName>jacocoArgLine</propertyName>   <!-- assembled into argLine below -->
+						</configuration>
+					</execution>
+					<execution>
+						<id>report</id>
+						<phase>verify</phase>
+						<goals><goal>report</goal></goals>
+					</execution>
+				</executions>
+			</plugin>
+			<!-- Lab 12: defines ${org.mockito:mockito-core:jar} = the jar's path, for the -javaagent below -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>dependency-paths</id>
+						<goals><goal>properties</goal></goals>
+					</execution>
+				</executions>
+			</plugin>
+			<!-- Lab 12: argLine of the test JVM = two agents.
+			     1. Mockito. Its inline mock maker needs an agent; attaching one to a running JVM is deprecated since
+			        JDK 21 and fails on this computer ("Could not self-attach to current VM"), so Mockito is a
+			        -javaagent, as its documentation recommends.
+			     2. JaCoCo. This project lives in "C:\Users\Айнур\OneDrive\Рабочий стол\...": the JVM reads the options
+			        of a -javaagent in the wrong charset, the destfile turned into "C:\Users\?????\..." and the test JVM
+			        died ("processing of -javaagent failed"). The destfile is rewritten to target/jacoco.exec relative
+			        to the test JVM's working directory (the project) - the same file the report goal reads.
+			     With -Djacoco.skip=true jacocoArgLine is empty and only Mockito is left. -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>test-jvm-agents</id>
+						<phase>initialize</phase>   <!-- after prepare-agent and dependency:properties (declared before it) -->
+						<goals><goal>regex-property</goal></goals>
+						<configuration>
+							<name>argLine</name>
+							<value>-javaagent:${org.mockito:mockito-core:jar} ${jacocoArgLine}</value>
+							<regex>destfile=[^,"]+</regex>
+							<replacement>destfile=target/jacoco.exec</replacement>
+							<failIfNoMatch>false</failIfNoMatch>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<argLine>@{argLine} ${test.jvm.os-options}</argLine>   <!-- @{}: set at run time -->
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
+
+	<profiles>
+		<!-- Lab 12: on Windows every NIO selector (Tomcat, the HTTP client behind RestTestClient) gets its internal pipe
+		     from a Unix domain socket created in %TEMP%. With a non-ASCII %TEMP% (C:\Users\Айнур\AppData\Local\Temp)
+		     the connect fails: "Unable to establish loopback connection". The sockets go to %PUBLIC% instead
+		     (C:\Users\Public, present on every Windows). -->
+		<profile>
+			<id>windows</id>
+			<activation>
+				<os><family>windows</family></os>
+			</activation>
+			<properties>
+				<test.jvm.os-options>-Djdk.net.unixdomain.tmpdir=${env.PUBLIC}</test.jvm.os-options>
+			</properties>
+		</profile>
+	</profiles>
 </project>

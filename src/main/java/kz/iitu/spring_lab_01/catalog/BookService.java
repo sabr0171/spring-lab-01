@@ -32,6 +32,11 @@ public class BookService {
         return repository.findById(id);
     }
 
+    // Lab 12: for callers that need the book to exist — the JSON API turns the exception into a 404
+    public Book requireById(long id) {
+        return repository.findById(id).orElseThrow(() -> new BookNotFoundException(id));
+    }
+
     // Lab 10, task 3.2: the rule travels with the method. Whatever controller calls it, only ADMIN gets through.
     @Transactional
     @PreAuthorize("hasRole('ADMIN')")

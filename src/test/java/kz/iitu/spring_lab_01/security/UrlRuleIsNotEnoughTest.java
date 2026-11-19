@@ -22,7 +22,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 // Checklist item 9: the scenario a URL rule would miss.
-// Somebody opens /api/** to every logged-in user (here: a second filter chain added by this test only).
+// Somebody opens /api/books/** to every logged-in user (here: a filter chain added by this test only, put
+// before the application's own API chain of lab 12, whose URL rule would refuse the DELETE by itself).
 // The URL rules for /books/** no longer matter — BookRestController reaches BookService.delete directly.
 // Only @PreAuthorize on the service still stops an ordinary user.
 @SpringBootTest
@@ -35,9 +36,9 @@ class UrlRuleIsNotEnoughTest extends PostgresIntegrationTest {
     static class CarelessApiChain {
 
         @Bean
-        @Order(1)
+        @Order(0)   // before SecurityConfiguration.apiFilterChain
         SecurityFilterChain carelessApi(HttpSecurity http) throws Exception {
-            http.securityMatcher("/api/**")
+            http.securityMatcher("/api/books/**")   // two chains may not use the same matcher
                     .authorizeHttpRequests(auth -> auth.anyRequest().authenticated())
                     .httpBasic(Customizer.withDefaults());
             return http.build();

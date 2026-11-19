@@ -3,6 +3,24 @@
 RWPSF 3305 — Web Application Development with Spring Framework.
 Sabyr Daryn, IT1-2411 IS.
 
+## Lab 12 — automated testing (variant 6: `FineService`, a fine capped at the maximum)
+
+```
+./mvnw clean verify          # 69 tests, then the coverage report: target/site/jacoco/index.html
+```
+
+| Level | Where |
+|---|---|
+| Unit (JUnit 5, Mockito, AssertJ — no Spring) | `src/test/java/kz/iitu/spring_lab_01/fine/FineServiceTest.java` |
+| Web slice (`@WebMvcTest`, `@MockitoBean`) | `web/BookControllerTest.java` |
+| Data slice (`@DataJpaTest`, `TestEntityManager`) | `catalog/BookRepositoryTest.java`, `fine/FineRepositoryTest.java` |
+| Integration (Testcontainers, `@ServiceConnection`, `RestTestClient`) | `web/BookApiIntegrationTest.java`, tests in `web/LibraryApiScenario.java`; without Docker the same tests run on an embedded PostgreSQL in `web/BookApiOnEmbeddedPostgresTest.java` |
+
+New for the tests: fines (`fine` package, `V6__fine.sql`; 100 tenge a day, at most 2000 —
+`app.fines.*` in `application.properties`; `POST /api/books/{id}/fines` for ADMIN, `GET /api/fines/mine`),
+problem details for the JSON API (`web/RestErrorAdvice.java`), and a stateless HTTP Basic filter chain for
+`/api/**`. Evidence — test summary, coverage before/after, Docker: [`docs/lab12-evidence.md`](docs/lab12-evidence.md).
+
 ## Lab 10 — the security subsystem (variant 6: a Content-Security-Policy)
 
 | What | Where |
@@ -72,6 +90,8 @@ Open http://localhost:8080/.
 ./mvnw test
 ```
 
-46 integration tests run against an embedded PostgreSQL 17 (no Docker needed): the access matrix,
-login against the database, BCrypt hashes, CSRF, `@PreAuthorize`, a scenario where a URL rule alone would
-not have been enough (`UrlRuleIsNotEnoughTest`) and the Content-Security-Policy (`ContentSecurityPolicyTest`).
+69 tests (`./mvnw clean verify`). The 46 of lab 10 run against an embedded PostgreSQL 17 (no Docker needed):
+the access matrix, login against the database, BCrypt hashes, CSRF, `@PreAuthorize`, a scenario where a URL rule
+alone would not have been enough (`UrlRuleIsNotEnoughTest`) and the Content-Security-Policy
+(`ContentSecurityPolicyTest`). The 23 of lab 12 are listed above; `BookApiIntegrationTest` needs Docker and is
+skipped, with the reason, without it.

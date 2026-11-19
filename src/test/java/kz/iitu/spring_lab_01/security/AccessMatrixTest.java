@@ -149,7 +149,8 @@ class AccessMatrixTest extends PostgresIntegrationTest {
         @Test
         void aUrlWithNoRuleIsForbidden() throws Exception {
             mvc.perform(get("/nowhere")).andExpect(status().isForbidden());
-            mvc.perform(get("/api/books")).andExpect(status().isForbidden());
+            // lab 12 opened /api/books/** to readers; /api/hello still has no rule
+            mvc.perform(get("/api/hello")).andExpect(status().isForbidden());
         }
     }
 

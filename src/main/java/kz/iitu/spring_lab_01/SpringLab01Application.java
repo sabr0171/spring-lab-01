@@ -2,8 +2,10 @@ package kz.iitu.spring_lab_01;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 
 @SpringBootApplication
+@ConfigurationPropertiesScan   // lab 12: fine.FinePolicy (app.fines.*)
 public class SpringLab01Application {
 
 	public static void main(String[] args) {
